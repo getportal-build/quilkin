@@ -5,7 +5,7 @@
 model {
   system = domain 'quilkin' {
     quilkin = service 'quilkin' {  // Cargo.toml:1
-      technology 'Rust · Axum · gRPC'
+      technology 'Rust · Axum · gRPC · SQLite (embedded)'
       metadata {
         code 'benches/**, crates/**, fuzz/**, sdks/**, src/**'
         otel_service 'quilkin'
@@ -107,12 +107,6 @@ model {
         }
       }
     }
-    SQLite = datastore 'SQLite' {  // Cargo.toml:317
-      technology 'SQLite'
-      metadata {
-        resource 'SQLite'
-      }
-    }
   }
 
   src -> config
@@ -132,7 +126,6 @@ model {
   net -> filters
   providers -> config
   providers -> net
-  quilkin -> SQLite  // reads or writes? say which: -[reads]-> or -[writes]->
 }
 
 specification {
