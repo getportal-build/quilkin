@@ -11,66 +11,6 @@ model {
         otel_service 'quilkin'
         resource 'quilkin'
       }
-      benches = component 'benches' {
-        metadata {
-          code 'benches/**'
-        }
-      }
-      crates = component 'crates' {
-        metadata {
-          code 'crates/**'
-        }
-      }
-      src = component 'src' {
-        metadata {
-          code 'src/*'
-        }
-      }
-      alloc = component 'alloc' {
-        metadata {
-          code 'src/alloc/**'
-        }
-      }
-      cli = component 'cli' {
-        metadata {
-          code 'src/cli/**'
-        }
-      }
-      codec = component 'codec' {
-        metadata {
-          code 'src/codec/**'
-        }
-      }
-      collections = component 'collections' {
-        metadata {
-          code 'src/collections/**'
-        }
-      }
-      components = component 'components' {
-        metadata {
-          code 'src/components/**'
-        }
-      }
-      config = component 'config' {
-        metadata {
-          code 'src/config/**'
-        }
-      }
-      filters = component 'filters' {
-        metadata {
-          code 'src/filters/**'
-        }
-      }
-      net = component 'net' {
-        metadata {
-          code 'src/net/**'
-        }
-      }
-      providers = component 'providers' {
-        metadata {
-          code 'src/providers/**'
-        }
-      }
       quilkin_corrosion = component 'quilkin-corrosion' {
         metadata {
           code 'crates/corrosion/**'
@@ -109,23 +49,6 @@ model {
     }
   }
 
-  src -> config
-  src -> filters
-  src -> net
-  alloc -> src
-  cli -> src
-  codec -> net
-  collections -> net
-  config -> filters
-  config -> net
-  filters -> src
-  filters -> config
-  filters -> net
-  net -> src
-  net -> config
-  net -> filters
-  providers -> config
-  providers -> net
 }
 
 specification {
