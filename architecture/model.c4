@@ -1,0 +1,66 @@
+// Starter spec, read from the code and traces by portal (no AI).
+// It says what exists. Add what the code can't: domains, your names,
+// rules, and what you plan to build.
+// Conventions: https://portal.haris-d21.workers.dev/skills/portal-architecture/SKILL.md
+model {
+  system = domain 'quilkin' {
+    quilkin = service 'quilkin' {  // Cargo.toml:1
+      technology 'Rust · Axum · gRPC · SQLite (embedded)'
+      metadata {
+        code 'benches/**, crates/**, fuzz/**, sdks/**, src/**'
+        otel_service 'quilkin'
+        resource 'quilkin'
+      }
+      quilkin_corrosion = component 'quilkin-corrosion' {
+        metadata {
+          code 'crates/corrosion/**'
+        }
+      }
+      quilkin_macros = component 'quilkin-macros' {
+        metadata {
+          code 'crates/macros/**'
+        }
+      }
+      quilkin_proto = component 'quilkin-proto' {
+        metadata {
+          code 'crates/quilkin-proto/**'
+        }
+      }
+      quilkin_system = component 'quilkin-system' {
+        metadata {
+          code 'crates/system/**'
+        }
+      }
+      quilkin_types = component 'quilkin-types' {
+        metadata {
+          code 'crates/types/**'
+        }
+      }
+      quilkin_xdp = component 'quilkin-xdp' {
+        metadata {
+          code 'crates/xdp/**'
+        }
+      }
+      quilkin_xds = component 'quilkin-xds' {
+        metadata {
+          code 'crates/xds/**'
+        }
+      }
+    }
+  }
+
+}
+
+specification {
+  element domain
+  element service
+  element event
+  element datastore
+  element infra
+  element component
+  relationship request
+  relationship publishes
+  relationship consumes
+  relationship reads
+  relationship writes
+}
