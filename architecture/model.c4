@@ -1,0 +1,150 @@
+// Starter spec, read from the code and traces by portal (no AI).
+// It says what exists. Add what the code can't: domains, your names,
+// rules, and what you plan to build.
+// Conventions: https://portal.haris-d21.workers.dev/skills/portal-architecture/SKILL.md
+model {
+  system = domain 'quilkin' {
+    quilkin = service 'quilkin' {  // Cargo.toml:1
+      technology 'Rust · Axum · gRPC'
+      metadata {
+        code 'benches/**, crates/**, fuzz/**, sdks/**, src/**'
+        otel_service 'quilkin'
+        resource 'quilkin'
+      }
+      benches = component 'benches' {
+        metadata {
+          code 'benches/**'
+        }
+      }
+      crates = component 'crates' {
+        metadata {
+          code 'crates/**'
+        }
+      }
+      src = component 'src' {
+        metadata {
+          code 'src/*'
+        }
+      }
+      alloc = component 'alloc' {
+        metadata {
+          code 'src/alloc/**'
+        }
+      }
+      cli = component 'cli' {
+        metadata {
+          code 'src/cli/**'
+        }
+      }
+      codec = component 'codec' {
+        metadata {
+          code 'src/codec/**'
+        }
+      }
+      collections = component 'collections' {
+        metadata {
+          code 'src/collections/**'
+        }
+      }
+      components = component 'components' {
+        metadata {
+          code 'src/components/**'
+        }
+      }
+      config = component 'config' {
+        metadata {
+          code 'src/config/**'
+        }
+      }
+      filters = component 'filters' {
+        metadata {
+          code 'src/filters/**'
+        }
+      }
+      net = component 'net' {
+        metadata {
+          code 'src/net/**'
+        }
+      }
+      providers = component 'providers' {
+        metadata {
+          code 'src/providers/**'
+        }
+      }
+      quilkin_corrosion = component 'quilkin-corrosion' {
+        metadata {
+          code 'crates/corrosion/**'
+        }
+      }
+      quilkin_macros = component 'quilkin-macros' {
+        metadata {
+          code 'crates/macros/**'
+        }
+      }
+      quilkin_proto = component 'quilkin-proto' {
+        metadata {
+          code 'crates/quilkin-proto/**'
+        }
+      }
+      quilkin_system = component 'quilkin-system' {
+        metadata {
+          code 'crates/system/**'
+        }
+      }
+      quilkin_types = component 'quilkin-types' {
+        metadata {
+          code 'crates/types/**'
+        }
+      }
+      quilkin_xdp = component 'quilkin-xdp' {
+        metadata {
+          code 'crates/xdp/**'
+        }
+      }
+      quilkin_xds = component 'quilkin-xds' {
+        metadata {
+          code 'crates/xds/**'
+        }
+      }
+    }
+    SQLite = datastore 'SQLite' {  // Cargo.toml:317
+      technology 'SQLite'
+      metadata {
+        resource 'SQLite'
+      }
+    }
+  }
+
+  src -> config
+  src -> filters
+  src -> net
+  alloc -> src
+  cli -> src
+  codec -> net
+  collections -> net
+  config -> filters
+  config -> net
+  filters -> src
+  filters -> config
+  filters -> net
+  net -> src
+  net -> config
+  net -> filters
+  providers -> config
+  providers -> net
+  quilkin -> SQLite  // reads or writes? say which: -[reads]-> or -[writes]->
+}
+
+specification {
+  element domain
+  element service
+  element event
+  element datastore
+  element infra
+  element component
+  relationship request
+  relationship publishes
+  relationship consumes
+  relationship reads
+  relationship writes
+}
